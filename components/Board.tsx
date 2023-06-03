@@ -31,6 +31,55 @@ function Board() {
         columns: rearrangedColumns,
       });
     }
+
+    const columns = Array.from(board.columns);
+    const startColIndex = columns[Number(source.droppableId)];
+    const finishColIndex = columns[Number(destination.droppableId)];
+
+    const startCol: Column = {
+      id: startColIndex[0],
+      todos: startColIndex[1].todos,
+    };
+
+    const finishCol: Column = {
+      id: finishColIndex[0],
+      todos: finishColIndex[1].todos,
+    };
+
+    if (!startCol || !finishCol) return;
+    if (source.index === destination.index && startCol === finishCol) return;
+
+    const newTodos = startCol.todos;
+    const [todoMoved] = newTodos.splice(source.index, 1);
+
+    if (startCol.id === finishCol.id) {
+      newTodos.splice(destination.index, 0, todoMoved);
+      const newCol: Column = {
+        id: startCol.id,
+        todos: newTodos,
+      };
+      const newColumns = new Map(board.columns);
+      newColumns.set(startCol.id, newCol);
+
+      setBoardState({ ...board, columns: newColumns });
+    } else {
+      const finishedTodos = Array.from(finishCol.todos);
+      finishedTodos.splice(destination.index, 0, todoMoved);
+
+      const newColumns = new Map(board.columns);
+      const newCol: Column = {
+        id: startCol.id,
+        todos: newTodos,
+      };
+
+      newColumns.set(startCol.id, newCol);
+      newColumns.set(finishCol.id, {
+        id: finishCol.id,
+        todos: finishedTodos,
+      });
+      
+      setBoardState({ ...board, columns: newColumns });
+    }
   };
 
   return (
