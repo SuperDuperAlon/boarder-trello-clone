@@ -9,11 +9,10 @@ const fetchSuggestion = async (board: Board) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ todos }),
+    body: JSON.stringify({todos}),
   });
 
   console.log(res);
-  
 
   const GPTdata = await res.json();
   console.log(GPTdata);
