@@ -35,6 +35,8 @@ function TodoCard({
     if (todo.image) {
       const fetchImage = async () => {
         const url = await getUrl(todo.image!);
+        console.log(typeof url);
+        
         if (url) {
           setImageUrl(url.toString());
         }
