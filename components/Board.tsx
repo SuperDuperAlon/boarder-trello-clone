@@ -27,7 +27,6 @@ function Board() {
       const [removed] = entries.splice(source.index, 1);
       entries.splice(destination.index, 0, removed);
       const rearrangedColumns = new Map(entries);
-      console.log(rearrangedColumns);
 
       setBoardState({
         ...board,

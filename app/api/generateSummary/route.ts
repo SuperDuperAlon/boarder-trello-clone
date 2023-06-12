@@ -12,14 +12,13 @@ export async function POST(request: Request) {
     messages: [
       {
         role: "system",
-        content:
-          "when responding, welcome the user always as Mr. Alon. Limit the response to 500 characters",
+        content: "say that this is a test",
       },
       {
         role: "user",
-        content: `Hi there, provide a summary of the following todos. Count how many todos are in each category such as To do, in progress and done, then tell the user have a productive day! Here the data:
-        ${JSON.stringify(todos)}`
-        ,
+        content: `Hi there, provide a summary of the following todos. Count how many todos are in each category such as To do, in progress and done, then tell the user have a productive day! Here the JSON data: ${JSON.stringify(
+          todos
+        )}, you may parse it as you want`,
       },
     ],
   });
