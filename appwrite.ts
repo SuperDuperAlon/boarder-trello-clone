@@ -9,5 +9,3 @@ const account = new Account(client);
 const databases = new Databases(client);
 
 export { client, account, databases, storage, ID };
-
-// 647ae4109f06b078ebb6
